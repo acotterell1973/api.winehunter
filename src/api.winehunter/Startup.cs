@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.winehunter.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +38,11 @@ namespace api.winehunter
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddXmlSerializerFormatters();
+
+            services.AddSingleton<IWineInfoRepository, WineInfoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
