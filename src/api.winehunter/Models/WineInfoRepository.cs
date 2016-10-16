@@ -1,19 +1,34 @@
 ﻿using System.Linq;
+using api.winehunter.DbModels;
 
 namespace api.winehunter.Models
 {
     public class WineInfoRepository : IWineInfoRepository
     {
-        public WineList Find(string upc)
+        public WineInfo Find(string upc)
         {
-            WineList wineItem;
+            WineInfo wineInfo;
             using (var db = new WineHunterContext())
             {
-                wineItem = db.WineList
-                    .First(wi => wi.UpcCode.ToLower().Trim() == upc.ToLower().Trim());
+
+                var wi = from wl in db.WineList
+                         join wv in db.WineVarieties on wl.WineVarietiesVarietyId equals wv.VarietyId
+                         where wl.Upc == upc
+                         select new WineInfo
+                         {
+                             Upc = wl.Upc,
+                             Producer = wl.Producer,
+                             VarietyName = wv.Name,
+                             WineListId = wl.WineListId,
+                             Region = wl.Region,
+                             Vintage = wl.Vintage
+                         };
+
+                wineInfo = wi.First();
+
             }
 
-            return wineItem;
+            return wineInfo;
         }
     }
 }

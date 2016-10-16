@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CFA562C-872D-4789-9E56-D578121593BE}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "api.winehunter", "src\api.winehunter\api.winehunter.xproj", "{73C54669-1632-402F-AB33-4718781B5769}"

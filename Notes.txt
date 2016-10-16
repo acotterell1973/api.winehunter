@@ -1,0 +1,1 @@
+Scaffold-DbContext -context WineHunterContext "Server=tcp:zu8cg4sdy2.database.windows.net,1433;Initial Catalog=winejournaldb;Persist Security Info=False;User ID=bexposedcommerce@zu8cg4sdy2;Password=MercedesCLK430!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models  -force
