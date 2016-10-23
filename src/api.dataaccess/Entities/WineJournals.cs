@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace api.winehunter.DbModels
+namespace api.dataaccess.Entities
 {
-    public partial class WineJournals
+    public class WineJournals
     {
         public string UserId { get; set; }
         public string DeviceId { get; set; }

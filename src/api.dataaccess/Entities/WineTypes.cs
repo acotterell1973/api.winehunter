@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace api.winehunter.DbModels
+namespace api.dataaccess.Entities
 {
-    public partial class WineTypes
+    public sealed class WineTypes
     {
         public WineTypes()
         {
@@ -13,6 +12,6 @@ namespace api.winehunter.DbModels
         public int WineTypeId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<WineVarietyTyes> WineVarietyTyes { get; set; }
+        public ICollection<WineVarietyTyes> WineVarietyTyes { get; set; }
     }
 }

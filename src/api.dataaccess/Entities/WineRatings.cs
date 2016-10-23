@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace api.winehunter.DbModels
+﻿namespace api.dataaccess.Entities
 {
-    public partial class WineRatings
+    public class WineRatings
     {
         public int WineRatingId { get; set; }
         public int WineListWineListId { get; set; }

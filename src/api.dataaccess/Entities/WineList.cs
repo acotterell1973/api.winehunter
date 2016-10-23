@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace api.winehunter.DbModels
+namespace api.dataaccess.Entities
 {
-    public partial class WineList
+    public sealed class WineList
     {
         public WineList()
         {
@@ -22,8 +22,8 @@ namespace api.winehunter.DbModels
         public bool? HasSulphites { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<WineJournals> WineJournals { get; set; }
-        public virtual ICollection<WineRatings> WineRatings { get; set; }
-        public virtual WineVarieties WineVarietiesVariety { get; set; }
+        public ICollection<WineJournals> WineJournals { get; set; }
+        public ICollection<WineRatings> WineRatings { get; set; }
+        public WineVarieties WineVarietiesVariety { get; set; }
     }
 }

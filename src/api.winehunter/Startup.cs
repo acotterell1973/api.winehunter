@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.winehunter.Models;
+﻿using api.dataaccess.Infrastructure;
+using api.dataaccess.Repositories;
+using api.dataaccess.Services;
+using api.dataaccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -43,6 +42,9 @@ namespace api.winehunter
                 .AddXmlSerializerFormatters();
 
             services.AddSingleton<IWineInfoRepository, WineInfoRepository>();
+            services.AddSingleton<IConnectionFactory, ConnectionFactory>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IWineService, WineServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

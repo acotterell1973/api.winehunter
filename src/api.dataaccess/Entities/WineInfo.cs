@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace api.winehunter.Models
+﻿namespace api.dataaccess.Entities
 {
-    public  class WineInfo
+    public sealed class WineInfo
     {
         public int WineListId { get; set; }
         public string Upc { get; set; }
         public string VarietyName { get; set; }
+        public string Variety { get; set; }
         public string Producer { get; set; }
         public string Region { get; set; }
         public int Vintage { get; set; }
