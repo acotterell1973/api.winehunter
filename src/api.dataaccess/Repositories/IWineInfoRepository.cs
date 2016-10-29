@@ -4,7 +4,7 @@ using api.dataaccess.Entities;
 
 namespace api.dataaccess.Repositories
 {
-    public interface IWineInfoRepository : IRepository<WineInfo>
+    public interface IWineInfoRepository : IBaseRepository<WineInfo>
     {
         Task<WineInfo> FindByUpcAsync(string upc);
         Task<List<WineInfo>> FindByProducerAsync(string producer);

@@ -6,6 +6,6 @@ namespace api.dataaccess.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         IWineInfoRepository WineInfoRepository { get; }
-        void Complete();
+        void Commit();
     }
 }

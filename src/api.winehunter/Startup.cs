@@ -1,4 +1,5 @@
-﻿using api.dataaccess.Infrastructure;
+﻿using api.dataaccess.CacheServices;
+using api.dataaccess.Infrastructure;
 using api.dataaccess.Repositories;
 using api.dataaccess.Services;
 using api.dataaccess.UnitOfWork;
@@ -41,7 +42,9 @@ namespace api.winehunter
                 .AddMvc()
                 .AddXmlSerializerFormatters();
 
-            services.AddSingleton<IWineInfoRepository, WineInfoRepository>();
+            services.AddSingleton<IRedisCacheConnector, RedisCacheConnector>();
+            services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+            services.AddSingleton<IWineInfoRepository, WineInfoBaseRepository>();
             services.AddSingleton<IConnectionFactory, ConnectionFactory>();
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IWineService, WineServices>();

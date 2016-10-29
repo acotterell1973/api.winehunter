@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using api.dataaccess.CacheServices;
 using api.dataaccess.Entities;
 using api.dataaccess.Infrastructure;
 using Dapper;
 
 namespace api.dataaccess.Repositories
 {
-    public class WineInfoRepository : Repository<WineInfo> ,IWineInfoRepository
+
+    public class WineInfoBaseRepository : BaseRepository<WineInfo> ,IWineInfoRepository
     {
-        IConnectionFactory _connectionFactory;
-        public WineInfoRepository(IConnectionFactory connectionFactory)
+        private readonly IConnectionFactory _connectionFactory;
+        private readonly ICacheProvider _cacheProvider;
+
+
+        public WineInfoBaseRepository(IConnectionFactory connectionFactory, ICacheProvider cacheProvider )
         {
             _connectionFactory = connectionFactory;
+            _cacheProvider = cacheProvider;
         }
 
         public WineInfo FindByUpc(string upc)

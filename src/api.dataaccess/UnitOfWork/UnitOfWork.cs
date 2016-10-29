@@ -6,6 +6,7 @@ namespace api.dataaccess.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IWineInfoRepository _wineInfoRepository;
+    
 
         public UnitOfWork(IWineInfoRepository wineInfoRepository)
         {
@@ -13,7 +14,7 @@ namespace api.dataaccess.UnitOfWork
         }
 
         public IWineInfoRepository WineInfoRepository => _wineInfoRepository;
-        public void Complete()
+        public void Commit()
         {
             throw new NotImplementedException();
         }
