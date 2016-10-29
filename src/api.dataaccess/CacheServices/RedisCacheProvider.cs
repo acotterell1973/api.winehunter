@@ -26,22 +26,17 @@ namespace api.dataaccess.CacheServices
         public void Add<T>(string key, T item, TimeSpan? timeToLive)
         {
             var cacheItem = JsonConvert.SerializeObject(item);
-
-            if (!Equals(cacheItem, default(T))) return;
-
             var lockOn = ConcurrentDictionary.GetOrAdd(key, new object());
 
             lock (lockOn)
             {
-                if (Equals(cacheItem, default(T)))
-                {
-                    _cache.StringSet(
+                _cache.StringSet(
                         key,
                         cacheItem,
                         timeToLive,
                         When.Always,
                         CommandFlags.FireAndForget);
-                }
+
 
             }
         }
@@ -121,7 +116,7 @@ namespace api.dataaccess.CacheServices
             }
             catch (JsonSerializationException)
             {
-        
+
             }
 
             return item;
@@ -149,18 +144,18 @@ namespace api.dataaccess.CacheServices
             if (cacheException) return null;
             try
             {
-                var item = dataRetriever.Invoke();
+                var item = await dataRetriever.Invoke();
 
                 // Avoid caching a null value.
                 if (item != null)
                 {
                     Add(key, item, timeToLive);
-                    return await item;
+                    return item;
                 }
             }
             catch (JsonSerializationException)
             {
-              
+
             }
 
             return null;
@@ -190,6 +185,19 @@ namespace api.dataaccess.CacheServices
         public bool Invalidate(string key)
         {
             return _cache.KeyDelete(key, CommandFlags.FireAndForget);
+        }
+
+        public async Task<bool> InvalidateAll()
+        {
+            await Task.Run(() =>
+            {
+                foreach (var keyValuePair in ConcurrentDictionary)
+                {
+                    Invalidate(keyValuePair.Key);
+                }
+            });
+
+            return true;
         }
 
         public TimeSpan? DefaultTtl => _defaultTtl;

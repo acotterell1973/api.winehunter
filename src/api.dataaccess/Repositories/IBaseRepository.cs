@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace api.dataaccess.Repositories
 {
@@ -17,6 +18,7 @@ namespace api.dataaccess.Repositories
         bool Update(TEntity item);
         bool Delete(int id);
 
-
+        Task<bool> ClearAllCachedItems();
+        
     }
 }

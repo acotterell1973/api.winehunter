@@ -8,5 +8,7 @@ namespace api.dataaccess.Services
     {
         Task<WineInfo> FindByUpcAsync(string upc);
         Task<List<WineInfo>> FindByProducerAsync(string producer);
+
+        Task<bool> ClearCacheAsync();
     }
 }

@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using api.dataaccess.CacheServices;
+using api.dataaccess.Infrastructure;
 
 namespace api.dataaccess.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
+        private readonly IConnectionFactory _connectionFactory;
+        private readonly ICacheProvider _cacheProvider;
+
+        public BaseRepository(IConnectionFactory connectionFactory, ICacheProvider cacheProvider)
+        {
+            _connectionFactory = connectionFactory;
+            _cacheProvider = cacheProvider;
+        }
+
         public IQueryable<TEntity> AsQueryable()
         {
             throw new NotImplementedException();
@@ -50,6 +62,11 @@ namespace api.dataaccess.Repositories
         public bool Delete(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> ClearAllCachedItems()
+        {
+            return await _cacheProvider.InvalidateAll();
         }
     }
 }

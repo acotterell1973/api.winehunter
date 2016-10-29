@@ -22,6 +22,8 @@ namespace api.dataaccess.CacheServices
 
         bool Invalidate(string key);
 
+        Task<bool> InvalidateAll();
+
         TimeSpan? DefaultTtl { get; }
     }
 }

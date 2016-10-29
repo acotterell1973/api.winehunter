@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using api.dataaccess.Entities;
 using api.dataaccess.UnitOfWork;
@@ -21,6 +22,11 @@ namespace api.dataaccess.Services
         public async Task<List<WineInfo>> FindByProducerAsync(string producer)
         {
             return await _unitOfWork.WineInfoRepository.FindByProducerAsync(producer);
+        }
+
+        public async Task<bool> ClearCacheAsync()
+        {
+            return await _unitOfWork.WineInfoRepository.ClearAllCachedItems();
         }
     }
 }

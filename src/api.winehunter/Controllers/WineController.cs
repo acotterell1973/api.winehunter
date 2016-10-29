@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.dataaccess.Repositories;
+﻿using System.Threading.Tasks;
 using api.dataaccess.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.winehunter.Controllers
 {
     [Route("api/[controller]")]
-    public class WineController : Controller
+    public class WineController : BaseController
     {
-        private readonly IWineService _wineService;
-      
-        public WineController(IWineService wineService)
+       
+        public WineController(IWineService wineService) : base(wineService)
         {
             _wineService = wineService;
         }

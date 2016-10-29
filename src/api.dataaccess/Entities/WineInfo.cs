@@ -13,5 +13,6 @@
         public decimal AlchoholLevel { get; set; }
         public bool HasSulphites { get; set; }
 
+        public string ImageSource => $"https://winehunter.blob.core.windows.net/wine-bottles/{Upc}";
     }
 }

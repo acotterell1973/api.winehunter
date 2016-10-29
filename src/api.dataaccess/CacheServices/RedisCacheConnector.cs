@@ -8,13 +8,13 @@ namespace api.dataaccess.CacheServices
     {
         private static readonly Lazy<ConfigurationOptions> ConfigOptions = new Lazy<ConfigurationOptions>(() =>
         {
-            const string customSetting = "tas.redis.Cache.windows.net,abortConnect=false,ssl=true,password=Pc6zcZkcDQDm6f2G7D2yHiWf0unY3JSDtTFpCRJ8jhQ=";
+            const string customSetting = "wine-hunter.redis.cache.windows.net:6380,ssl=True,abortConnect=False,password=bjjbKt5WuT27eRP/7gSLq8RbScKZnJo3VC2bWadsPSo=";
             var redisConnection = customSetting.Split(',');
             var configOptions = new ConfigurationOptions
             {
                 ConnectTimeout = 100000,
                 SyncTimeout = 100000,
-                ClientName = "asap.web.api",
+                ClientName = "api.winehunter",
                 Ssl = true,
                 AbortOnConnectFail = false,
                 Password = redisConnection.Last().Replace("password=", string.Empty)
