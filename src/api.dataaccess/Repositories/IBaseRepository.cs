@@ -13,8 +13,8 @@ namespace api.dataaccess.Repositories
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
         TEntity First(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll();
-        TEntity GetItem(int id);
-        TEntity Add(TEntity item);
+        Task<TEntity> GetItemAsync<T>(T id);
+        Task<TEntity> AddAsync(TEntity item);
         bool Update(TEntity item);
         bool Delete(int id);
 
