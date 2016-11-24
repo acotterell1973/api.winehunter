@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 
 namespace api.winehunter
 {
@@ -12,14 +9,34 @@ namespace api.winehunter
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
+            Console.WriteLine("Wine Hunter API Serivces");
+            Console.WriteLine("INFORMATION");
+            Console.WriteLine("This service provides the necessary api to create and catalog the users favorite wines");
+
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
                 .Build();
 
-            host.Run();
+            var host = new WebHostBuilder()
+               
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(config)
+                .UseStartup<Startup>()
+                .UseKestrel(options =>
+                {
+                    if (config["threadCount"] != null)
+                    {
+                        options.ThreadCount = int.Parse(config["threadCount"]);
+                    }
+
+                    //TODO: Enable Https
+                    //options.UseHttps("","");
+                })
+                .UseUrls("http://localhost:5000", "https://localhost:5001")
+                .UseIISIntegration()
+                .Build();
+
+                host.Run();
         }
     }
 }

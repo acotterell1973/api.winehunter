@@ -5,6 +5,7 @@ using api.dataaccess.Services;
 using api.dataaccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,7 +38,6 @@ namespace api.winehunter
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-
             services
                 .AddMvc()
                 .AddXmlSerializerFormatters();
@@ -53,11 +53,10 @@ namespace api.winehunter
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
             app.UseApplicationInsightsRequestTelemetry();
-
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
